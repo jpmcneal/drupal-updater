@@ -1,11 +1,43 @@
+#!/usr/bin/env php
+
 <?php
 // 2019-05-21
 // >= PHP 5.1.0
 // Drupal core 8.7.1
 // Drupal core 7.67
 
+// This allows user to pass Drupal Version via CLI
+// var_dump($argv[1]);
+
+// die();
+
+$version = $argv[1];
+
+// Usage: echo $version['version'];
+// Return: 7.79
+
+// @todo Ask user for major version (7 or 8)
+// @todo Ask user for latest or specific version
+
+
+
+// Found this helper function on https://stackoverflow.com/questions/21439239/download-latest-github-release
+// to fetch the tags from Drupal's Github mirror at https://github.com/drupal/drupal
+// Once we have the tags, we can download specific version from there or ftp.drupal.org
+
+// function getLatestTagUrl($repository, $default = 'master') {
+//     $file = @json_decode(@file_get_contents("https://api.github.com/repos/$repository/tags", false,
+//         stream_context_create(['http' => ['header' => "User-Agent: Vestibulum\r\n"]])
+//     ));
+
+//     return sprintf("https://github.com/$repository/archive/%s.zip", $file ? reset($file)->name : $default);
+// }
+
+// Usage: getLatestTagUrl('drupal/drupal');
+
 //Setting
-$latest_drupal8_url="https://ftp.drupal.org/files/projects/drupal-8.7.1.zip";
+// @TODO: Get tarball
+$latest_drupal8_url="https://ftp.drupal.org/files/projects/drupal-$version.zip";
 $folders_to_copy_v8=[
   'sites/default/files',
   'core/themes',
@@ -19,7 +51,8 @@ $files_to_copy_v8=[
   //'composer.lock',
   'composer.json'
 ];
-$latest_drupal7_url="https://ftp.drupal.org/files/projects/drupal-7.67.zip";
+// @TODO: Get tarball
+$latest_drupal7_url="https://ftp.drupal.org/files/projects/drupal-$version.zip";
 $folders_to_copy_v7=[
   'sites/default/files',
   'sites/all',
